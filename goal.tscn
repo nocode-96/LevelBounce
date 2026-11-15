@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://r06ykkr8a7xp"]
+
+[ext_resource type="Script" uid="uid://c1l1pawmmuj6v" path="res://goal.gd" id="1_p20yd"]
+[ext_resource type="Texture2D" uid="uid://hn50x0ty283t" path="res://Assets/goal.png" id="2_gcynx"]
+[ext_resource type="AudioStream" uid="uid://v2g00py8ynd" path="res://Assets/win.wav" id="3_la2f0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xis31"]
+size = Vector2(48, 64)
+
+[node name="Goal" type="Area2D" unique_id=556370443]
+script = ExtResource("1_p20yd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=678299463]
+texture = ExtResource("2_gcynx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=510112574]
+shape = SubResource("RectangleShape2D_xis31")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1010978430]
+stream = ExtResource("3_la2f0")

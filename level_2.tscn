@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://bg56qbymup5k7"]
+
+[ext_resource type="Script" uid="uid://debdwn1sprfx8" path="res://main_level2.gd" id="1_78pok"]
+[ext_resource type="Texture2D" uid="uid://b35jxkfwcnhvv" path="res://Assets/Char/idle1.png" id="3_5vw27"]
+[ext_resource type="Texture2D" uid="uid://dfgigp20xcevf" path="res://Assets/Char/fall.png" id="3_efxa6"]
+[ext_resource type="Script" uid="uid://du2b77ekliw2w" path="res://player_controller.gd" id="3_w48qg"]
+[ext_resource type="Texture2D" uid="uid://bi4vq33me3pkk" path="res://Assets/Char/idle2.png" id="4_kek77"]
+[ext_resource type="Texture2D" uid="uid://t2sn48x07873" path="res://Assets/Char/idle3.png" id="5_kek77"]
+[ext_resource type="Texture2D" uid="uid://depnn4vcjpkw5" path="res://Assets/Char/jump.png" id="7_dg77c"]
+[ext_resource type="Texture2D" uid="uid://cu3d3uiny81gn" path="res://Assets/Char/walk3.png" id="8_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://lu2ve4j2356p" path="res://Assets/Char/walk1.png" id="9_w48qg"]
+[ext_resource type="Texture2D" uid="uid://fbeh04042vt" path="res://Assets/Char/walk2.png" id="10_vivmo"]
+[ext_resource type="Texture2D" uid="uid://2712icdn3mua" path="res://Assets/Blocks/Background.png" id="11_dg77c"]
+[ext_resource type="AudioStream" uid="uid://deqc1dbkskq3" path="res://Assets/jump.wav" id="12_vivmo"]
+[ext_resource type="PackedScene" uid="uid://dlcge4gbxqssp" path="res://platform.tscn" id="13_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://clbkvee26st8f" path="res://moving_platform.tscn" id="14_lvfll"]
+[ext_resource type="PackedScene" uid="uid://dtxs74g8fk10m" path="res://coin.tscn" id="14_yaehf"]
+[ext_resource type="PackedScene" uid="uid://r06ykkr8a7xp" path="res://goal.tscn" id="15_vivmo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sronq"]
+size = Vector2(63, 78)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sronq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_efxa6")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5vw27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kek77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kek77")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_dg77c")
+}],
+"loop": 1,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ycdy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_w48qg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vivmo")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Node" type="Node" unique_id=611620228]
+script = ExtResource("1_78pok")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1773306371]
+position = Vector2(900.9999, 414.5)
+scale = Vector2(1.9375, 1.3527778)
+texture = ExtResource("11_dg77c")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=914085745]
+position = Vector2(200, 350)
+script = ExtResource("3_w48qg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1823009733]
+shape = SubResource("RectangleShape2D_sronq")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=533474862]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=2023695200]
+scale = Vector2(0.5296877, 0.6640625)
+sprite_frames = SubResource("SpriteFrames_sronq")
+animation = &"fall"
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="Player" unique_id=1376602035]
+stream = ExtResource("12_vivmo")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1282702826]
+
+[node name="Platform1" parent="Platforms" unique_id=739102670 instance=ExtResource("13_2cqfq")]
+position = Vector2(200, 430)
+
+[node name="Platform2" parent="Platforms" unique_id=1710240526 instance=ExtResource("13_2cqfq")]
+position = Vector2(400, 340)
+
+[node name="Platform3" parent="Platforms" unique_id=10566813 instance=ExtResource("13_2cqfq")]
+position = Vector2(620, 240)
+
+[node name="Platform4" parent="Platforms" unique_id=1342529080 instance=ExtResource("13_2cqfq")]
+position = Vector2(1200, 240)
+
+[node name="Platform5" parent="Platforms" unique_id=1532940486 instance=ExtResource("13_2cqfq")]
+position = Vector2(1420, 340)
+
+[node name="Platform6" parent="Platforms" unique_id=1401382289 instance=ExtResource("13_2cqfq")]
+position = Vector2(1900, 220)
+
+[node name="MovingPlatform1" parent="Platforms" unique_id=1701138996 instance=ExtResource("14_lvfll")]
+position = Vector2(800, 240)
+move_distance = 240.0
+speed = 90.0
+
+[node name="MovingPlatform2" parent="Platforms" unique_id=805926847 instance=ExtResource("14_lvfll")]
+position = Vector2(1650, 420)
+move_distance = -180.0
+move_horizontal = false
+
+[node name="Coins" type="Node2D" parent="." unique_id=1165741278]
+
+[node name="Coin1" parent="Coins" unique_id=178605700 instance=ExtResource("14_yaehf")]
+position = Vector2(400, 270)
+
+[node name="Coin2" parent="Coins" unique_id=780443425 instance=ExtResource("14_yaehf")]
+position = Vector2(620, 170)
+
+[node name="Coin3" parent="Coins" unique_id=294948236 instance=ExtResource("14_yaehf")]
+position = Vector2(920, 160)
+
+[node name="Coin4" parent="Coins" unique_id=1676622160 instance=ExtResource("14_yaehf")]
+position = Vector2(1200, 170)
+
+[node name="Coin5" parent="Coins" unique_id=546955262 instance=ExtResource("14_yaehf")]
+position = Vector2(1420, 270)
+
+[node name="Coin6" parent="Coins" unique_id=1105125873 instance=ExtResource("14_yaehf")]
+position = Vector2(1650, 200)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1680919959]
+
+[node name="CoinLabel" type="Label" parent="HUD" unique_id=1792595400]
+offset_left = 20.0
+offset_top = 20.0
+text = "Level 2  |  Coins: 0"
+
+[node name="Goal" parent="." unique_id=556370443 instance=ExtResource("15_vivmo")]
+position = Vector2(1900, 130)
+is_final_goal = true
